@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Edit This Flight!</h1>
+    <a href="#" routerLink="/flight/f-index" class="btn btn-info">Back</a>
+    <form [formGroup]= 'newFlightForm' (ngSubmit)= 'submit()'>
+        <div class="form-group">
+            <label for="flightNum">Flight Number</label>
+            <input type="text" class="form-control" id="flightNum" formControlName="flightNum" />
+        </div>
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input type="text" class="form-control" id="destionation" formControlName="destination" />
+        </div>
+        <div class="form-group">
+            <label for="departureAirport">Departure Airport</label>
+            <input type="text" class="form-control" id="departureAirport" formControlName="departureAirport" />
+        </div>
+        <div class="form-group">
+            <label for="departureTime">Departure Time</label>
+            <input type="text" class="form-control" id="departureTime" formControlName="departureTime" />
+        </div>
+        <div class="form-group">
+            <label for="departureDate">Departure Date</label>
+            <input type="text" class="form-control" id="departureDate" formControlName="departureDate" />
+        </div>
+        <div class="form-group">
+            <label for="arrivalAirport">Arrival Airport</label>
+            <input type="text" class="form-control" id="arrivalAirport" formControlName="arrivalAirport" />
+        </div>
+        <div class="form-group">
+            <label for="arrivalTime">Arrival Time</label>
+            <input type="text" class="form-control" id="arrivalTime" formControlName="arrivalTime" />
+        </div>
+        <div class="form-group">
+            <label for="arrivalDate">Arrival Date</label>
+            <input type="text" class="form-control" id="arrivalDate" formControlName="arrivalDate" />
+        </div>
+        <div class="form-group">
+            <label for="maxCapacity">maxCapacity</label>
+            <input type="text" class="form-control" id="maxCapacity" formControlName="maxCapacity" />
+        </div>
+        <button type="submit" class="btn btn-success" [disabled] ="!newFlightForm.valid">Submit</button>
