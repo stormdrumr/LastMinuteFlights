@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Travel } from './travel';
+import { Travel, TravelDto } from './travel';
 
 @Injectable({
   providedIn: 'root'
@@ -25,22 +25,23 @@ export class FlightService {
     return this.http.get<Travel[]>(this.flightUrl, this.httpOptions);
     }
 
-  getOneFlight(id: number): Observable<Travel>{
-    let url = '${this.flightUrl}/${flightId}';
+  getOneFlight(flightID: number): Observable<Travel>{
+    //let url = '${this.flightUrl}/1';
+    let url = this.flightUrl + '/' + flightID;
     return this.http.get<Travel>(url, this.httpOptions);
   }
 
-  createFlight(flight: Travel): Observable<Travel>{
-    return this.http.post<Travel>(this.flightUrl, flight, this.httpOptions);
+  createFlight(flight: TravelDto): Observable<TravelDto>{
+    return this.http.post<TravelDto>(this.flightUrl, flight, this.httpOptions);
   }
 
   updateFlight(flight: Travel): Observable<Travel>{
-    let url = '${this.flightUrl}/${flight.flightId}';
+    let url = '${this.flightUrl}/${flight.flightID}';
     return this.http.put<Travel>(url, flight, this.httpOptions);
   }
 
   deleteFlight(flightId: number): Observable<Travel>{
-    return this.http.delete<Travel>('${this.flightUrl}/${flightId}}', this.httpOptions);
+    return this.http.delete<Travel>('${this.flightUrl}/${flightID}}', this.httpOptions);
   }
 
 }

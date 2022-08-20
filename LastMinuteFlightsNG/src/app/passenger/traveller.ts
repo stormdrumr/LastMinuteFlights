@@ -1,5 +1,5 @@
 export interface Traveller {
-    passengerId: number;
+    passengerID: number;
     firstName: string;
     lastName: string;
     email: string;

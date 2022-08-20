@@ -20,4 +20,9 @@ loadFlights() : void {
   this.flightService.getFlights().subscribe(travel => this.travel = travel)
 }
 
+makeFlight(travel: Travel) : void {
+  this.flightService.createFlight(travel).subscribe()
+  }
+
+
 }

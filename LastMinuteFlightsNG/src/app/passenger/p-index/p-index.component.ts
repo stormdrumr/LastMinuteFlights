@@ -15,10 +15,10 @@ export class PIndexComponent implements OnInit {
   constructor(private passengerService: PassengerService) { }
 
   ngOnInit(): void {
-    this.loadFlights();
+    this.loadPassengers();
   }
 
-loadFlights() : void {
+loadPassengers() : void {
   this.passengerService.getPassengers().subscribe(traveller => this.traveller = traveller)
 }
 }

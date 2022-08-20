@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let t of travel" class="table table-striped-columns">
-                <td><span><a href="#">{{t.flightID}}</a></span></td>
+                <td><span><a href="#" [routerLink]="['/flight/fdetails/',t.flightID]" >{{t.flightID}}</a></span></td>
                 <td>{{t.flightNum}}</td>
                 <td>{{t.destination}}</td>
                 <td>{{t.departureAirport}}</td>
@@ -31,7 +31,7 @@
                 <td>{{t.arrivalDate}}</td>
                 <td>{{t.maxCapacity}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" routerLink="/flight/fedit/flightID" class="btn btn-primary">Edit</a>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </td>
             </tr>

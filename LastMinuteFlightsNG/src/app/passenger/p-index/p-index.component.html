@@ -1,6 +1,6 @@
 <div class="container">
-    <h1>Flight(s)</h1>
-    <a href="#" routerLink="/flight/create" class="btn btn-success">Create a new flight</a>
+    <h1>Passenger(s)</h1>
+    <a href="#" routerLink="/passenger/pcreate" class="btn btn-success">Add a new Passenger Here</a>
     <div>
     <table class="table-borderded table">
         <thead>
@@ -14,12 +14,12 @@
         </thead>
         <tbody>
             <tr *ngFor="let t of traveller" class="table table-striped-columns">
-                <td><span><a href="#">{{t.passengerId}}</a></span></td>
+                <td><span><a href="#" routerLink="passenger/pdetails/passengerID">{{t.passengerID}}</a></span></td>
                 <td>{{t.firstName}}</td>
                 <td>{{t.lastName}}</td>
                 <td>{{t.email}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" routerLink="passenger/pedit/:passengerID" class="btn btn-primary">Edit</a>
                     <button type="button" class="btn btn-danger">Delete</button>
                 </td>
             </tr>

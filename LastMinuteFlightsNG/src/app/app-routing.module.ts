@@ -4,7 +4,7 @@ import { FIndexComponent } from './flight/f-index/f-index.component';
 import { PIndexComponent } from './passenger/p-index/p-index.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'flight', pathMatch: 'full'},
+  {path: '', redirectTo: '/flight/f-index', pathMatch: 'full'},
   {path: 'flight', component: FIndexComponent},
   {path: 'passenger', component: PIndexComponent}
 ];

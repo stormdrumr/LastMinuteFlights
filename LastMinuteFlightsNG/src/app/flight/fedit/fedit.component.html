@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Edit This Flight!</h1>
-    <a href="#" routerLink="/flight/f-index" class="btn btn-info">Back</a>
+    <a href="#" routerLink="/flight/fedit/:flightID" class="btn btn-info">Back</a>
     <form [formGroup]= 'newFlightForm' (ngSubmit)= 'submit()'>
         <div class="form-group">
             <label for="flightNum">Flight Number</label>

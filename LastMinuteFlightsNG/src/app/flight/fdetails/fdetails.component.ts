@@ -11,7 +11,7 @@ import { Travel } from '../travel';
 })
 export class FdetailsComponent implements OnInit {
 
-  flightId!: number;
+  flightID!: number;
   // flightNum!: string;
   // destination!: string;
   // departureAirport!: string;
@@ -33,10 +33,12 @@ export class FdetailsComponent implements OnInit {
   { }
 
   ngOnInit(): void {
-    this.flightId = this.route.snapshot.params['flightId'];
+    this.flightID = this.route.snapshot.params['flightID'];
 
-    this.flightService.getOneFlight(this.flightId).subscribe((data: Travel)=>{
+    this.flightService.getOneFlight(this.flightID).subscribe((data: Travel)=>{
       this.travel = data;
+
+      console.log(data);
 
       // this.flightNum
       // this.destination
