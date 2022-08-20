@@ -10,7 +10,7 @@ import { Travel } from '../travel';
 export class FIndexComponent implements OnInit {
   travel: Travel[] = [];
 
-  constructor(private flightService: FlightService) { }
+  constructor(private flightService: FlightService, public fs: FlightService) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -19,10 +19,5 @@ export class FIndexComponent implements OnInit {
 loadFlights() : void {
   this.flightService.getFlights().subscribe(travel => this.travel = travel)
 }
-
-makeFlight(travel: Travel) : void {
-  this.flightService.createFlight(travel).subscribe()
-  }
-
 
 }

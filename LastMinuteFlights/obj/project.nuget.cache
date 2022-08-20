@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P1er8QMQL3YCbPsReS5CJgOy1oOeg5NwIaa823pln/zh8uV3TiScp9ePLGvtxp3pyjJ6iiL27TXUDcbBbfJXWQ==",
+  "dgSpecHash": "UIpXa4qWwpH+Qv6p5fyum5JKPZv1Xz8qIfGRnDZeaZg2PZbsxkG6pBXDb9BcQIvjiBu3eBWw3QEpnw0ZWJ+5Xg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\LastMinuteFlights.csproj",
+  "projectFilePath": "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\LastMinuteFlights.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\drumm\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\drumm\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

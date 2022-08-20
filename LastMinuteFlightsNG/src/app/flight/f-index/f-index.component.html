@@ -31,8 +31,8 @@
                 <td>{{t.arrivalDate}}</td>
                 <td>{{t.maxCapacity}}</td>
                 <td>
-                    <a href="#" routerLink="/flight/fedit/flightID" class="btn btn-primary">Edit</a>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <a href="#" [routerLink]="['/flight/fedit/',t.flightID]" class="btn btn-primary">Edit</a>
+                    <button type="button" (click)="fs.deleteFlight(t.flightID)" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
         </tbody>

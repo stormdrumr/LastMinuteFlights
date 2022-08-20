@@ -36,7 +36,7 @@ export class FcreateComponent implements OnInit {
     console.log(this.newFlightForm.value);
     console.log(this.newFlightForm.valid);
     console.log("The new flight was created successfully.");
-    this.router.navigateByUrl('flight/index');
+    this.router.navigateByUrl('flight/f-index');
   });
 }
 }

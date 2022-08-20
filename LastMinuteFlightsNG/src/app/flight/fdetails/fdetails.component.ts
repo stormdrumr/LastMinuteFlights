@@ -34,22 +34,9 @@ export class FdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.flightID = this.route.snapshot.params['flightID'];
-
     this.flightService.getOneFlight(this.flightID).subscribe((data: Travel)=>{
       this.travel = data;
-
       console.log(data);
-
-      // this.flightNum
-      // this.destination
-      // this.departureAirport
-      // this.departureTime
-      // this.departureDate
-      // this.arrivalAirport
-      // this.arrivalTime
-      // this.arrivalDate
-      // this.maxCapacity
     });
   }
-
 }

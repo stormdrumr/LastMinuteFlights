@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\LastMinuteFlights.csproj": {}
+    "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\LastMinuteFlights.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\LastMinuteFlights.csproj": {
+    "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\LastMinuteFlights.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\LastMinuteFlights.csproj",
+        "projectUniqueName": "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\LastMinuteFlights.csproj",
         "projectName": "LastMinuteFlights",
-        "projectPath": "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\LastMinuteFlights.csproj",
+        "projectPath": "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\LastMinuteFlights.csproj",
         "packagesPath": "C:\\Users\\drumm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drumm\\source\\repos\\LastMinute Flights\\LastMinuteFlights\\obj\\",
+        "outputPath": "C:\\Users\\drumm\\source\\repos\\LastMinuteFlights\\LastMinuteFlights\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\drumm\\AppData\\Roaming\\NuGet\\NuGet.Config",
