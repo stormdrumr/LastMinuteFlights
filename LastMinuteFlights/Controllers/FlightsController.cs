@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LastMinuteFlights.Data;
 using LastMinuteFlights.Models;
+using LastMinuteFlights.DTO;
 
 namespace LastMinuteFlights.Controllers
 {
@@ -54,31 +55,49 @@ namespace LastMinuteFlights.Controllers
         }
         // TODO: Change path listing to api/Flights/Passenger/5
         // GET: api/Flights/Passenger/5
-        [HttpGet("Passenger/{id}")]
-        public async Task<ActionResult<Flight>> GetFlightsByPassenger(int id)
-        {
-            if (_context.Flights == null)
-            {
-                return NotFound();
-            }
+        //[HttpGet("Passenger/{id}")]
+        //public async Task<ActionResult<Flight>> GetFlightsByPassenger(int id)
+        //{
+        //    if (_context.Flights == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var passenger = await _context.Passengers.Include(p => p.BookedFlights).FirstOrDefaultAsync(p => p.PassengerID == id);
-            var flight = passenger.BookedFlights;
+        //    var passenger = await _context.Passengers.Include(p => p.BookedFlights).FirstOrDefaultAsync(p => p.PassengerId == id);
+        //    var flight = passenger.BookedFlights;
 
-            return Ok(flight);
-        }
+        //    return Ok(flight);
+        //}
 
         // PUT: api/Flights/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFlight(int id, Flight flight)
+        public async Task<IActionResult> PutFlight(int id, FlightDto flightDto)
         {
-            if (id != flight.FlightID)
+            if (id != flightDto.Id)
             {
                 return BadRequest("Flight not found");
             }
 
-            _context.Entry(flight).State = EntityState.Modified;
+            if (flightDto != null)
+            {
+                flightDto.Id = id;
+
+                var flight = await _context.Flights.FindAsync(id);
+
+                flight.FlightNum = flightDto.FlightNum;
+                flight.Destination = flightDto.Destination;
+                flight.DepartureAirport = flightDto.DepartureAirport;
+                flight.DepartureTime = flightDto.DepartureTime;
+                flight.DepartureDate = flightDto.DepartureDate;
+                flight.ArrivalAirport = flightDto.ArrivalAirport;
+                flight.ArrivalTime = flightDto.ArrivalTime;
+                flight.ArrivalDate = flightDto.ArrivalDate;
+                flight.MaxCapacity = flightDto.MaxCapacity;
+
+                _context.Entry(flight).State = EntityState.Modified;
+            }
+            
 
             try
             {
@@ -97,22 +116,35 @@ namespace LastMinuteFlights.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(await _context.Flights.ToListAsync());
         }
 
         // POST: api/Flights
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Flight>> PostFlight(Flight flight)
+        public async Task<ActionResult<Flight>> PostFlight(FlightDto flightDto)
         {
             if (_context.Flights == null)
             {
                 return Problem("No flights were added. If problems persist, please contact your system adminstrator.");
             }
+
+            var flight = new Flight() {
+
+            FlightNum = flightDto.FlightNum,
+            Destination = flightDto.Destination,
+            DepartureAirport = flightDto.DepartureAirport,
+            DepartureTime = flightDto.DepartureTime,
+            DepartureDate = flightDto.DepartureDate,
+            ArrivalAirport = flightDto.ArrivalAirport,
+            ArrivalTime = flightDto.ArrivalTime,
+            ArrivalDate = flightDto.ArrivalDate,
+            MaxCapacity = flightDto.MaxCapacity
+        };
             _context.Flights.Add(flight);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFlight", new { id = flight.FlightID }, flight);
+            return CreatedAtAction("GetFlight", new { id = flight.FlightID }, flightDto);
         }
 
         // DELETE: api/Flights/5

@@ -11,6 +11,7 @@ using LastMinuteFlights.DTO;
 
 namespace LastMinuteFlights.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class PassengersController : ControllerBase
@@ -35,20 +36,20 @@ namespace LastMinuteFlights.Controllers
             return await _context.Passengers.ToListAsync();
         }
 
-        // GET: api/Passengers/Flight/5
-        [HttpGet("Flight/{id}")]
-        public async Task<ActionResult<Flight>> GetPassengersByFlight(int id)
-        {
-            if (_context.Passengers == null)
-            {
-                return NotFound();
-            }
+        //// GET: api/Passengers/Flight/5
+        //[HttpGet("Passengers/Flight/{id}")]
+        //public async Task<ActionResult<Flight>> GetPassengersByFlight(int id)
+        //{
+        //    if (_context.Passengers == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var flight = await _context.Flights.Include(f => f.BookedPassengers).FirstOrDefaultAsync(f => f.FlightID == id);
-            var passenger = flight.BookedPassengers;
+        //    var flight = await _context.Flights.Include(f => f.BookedPassengers).FirstOrDefaultAsync(f => f.FlightID == id);
+        //    var passenger = flight.BookedPassengers;
 
-            return Ok(flight);
-        }
+        //    return Ok(flight);
+        //}
 
         // GET: api/Passengers/5
         [HttpGet("{id}")]
@@ -67,28 +68,41 @@ namespace LastMinuteFlights.Controllers
 
             return passenger;
         }
-    
+
         // PUT: api/Passengers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPassenger(int id, PassengerDto passengerDto)
         {
-            if (id != passengerDto.Id)
+            if (id != passengerDto.PassengerId)
             {
-                return BadRequest();
+                return BadRequest("Passenger not found");
             }
 
-            _context.Entry(passengerDto).State = EntityState.Modified;
+            if (passengerDto != null)
+            {
+                passengerDto.PassengerId = id;
+
+                var passenger = await _context.Passengers.FindAsync(id);
+
+                passenger.FirstName = passengerDto.FirstName;
+                passenger.LastName = passengerDto.LastName;
+                passenger.Email = passengerDto.Email;
+
+                _context.Entry(passenger).State = EntityState.Modified;
+            }
+
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                _logger.LogError(ex, "An error occurred while attempting to update the passenger information.");
                 if (!PassengerExists(id))
                 {
-                    return NotFound();
+                    return Problem("There is no passenger matching this criteria");
                 }
                 else
                 {
@@ -96,49 +110,59 @@ namespace LastMinuteFlights.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(await _context.Passengers.ToListAsync());
         }
 
         // POST: api/Passengers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Passenger>> PostPassenger(Passenger passenger)
+        public async Task<ActionResult<Passenger>> PostPassenger(PassengerDto passengerDto)
         {
             if (_context.Passengers == null)
             {
-                return Problem("Entity set 'FlightDbContext.Passengers'  is null.");
+                return Problem("No passengers were added. If problems persist, please contact your system adminstrator.");
             }
+
+            var passenger = new Passenger()
+            {
+
+                FirstName = passengerDto.FirstName,
+                LastName = passengerDto.LastName,
+                Email = passengerDto.Email
+
+            };
             _context.Passengers.Add(passenger);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPassenger", new { id = passenger.PassengerID }, passenger);
+            return CreatedAtAction("GetFlight", new { id = passenger.PassengerId }, passengerDto);
         }
+            // DELETE: api/Passengers/5
+            [HttpDelete("{id}")]
 
-        // DELETE: api/Passengers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePassenger(int id)
-        {
-            if (_context.Passengers == null)
+            public async Task<IActionResult> DeletePassenger(int id)
             {
-                return NotFound();
+                if (_context.Passengers == null)
+                {
+                    return NotFound();
+                }
+                var passenger = await _context.Passengers.FindAsync(id);
+                if (passenger == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Passengers.Remove(passenger);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-            var passenger = await _context.Passengers.FindAsync(id);
-            if (passenger == null)
+
+            private bool PassengerExists(int id)
             {
-                return NotFound();
+                return (_context.Passengers?.Any(e => e.PassengerId == id)).GetValueOrDefault();
             }
 
-            _context.Passengers.Remove(passenger);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PassengerExists(int id)
-        {
-            return (_context.Passengers?.Any(e => e.PassengerID == id)).GetValueOrDefault();
-        }
-    }
         
-    
+    }
+
 }

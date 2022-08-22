@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { FlightService } from '../flight.service';
+import { Travel } from '../travel';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class FeditComponent implements OnInit {
 
   public newFlightForm!: FormGroup;
+  public travel!: Travel;
   constructor(private flightService: FlightService, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,11 +33,11 @@ export class FeditComponent implements OnInit {
   get nFF () {return this.newFlightForm.controls;}
 
   submit(){
-    this.flightService.createFlight(this.newFlightForm.value).subscribe(() => {
+    this.flightService.updateFlight(this.newFlightForm.value).subscribe(() => {
     console.log(this.newFlightForm.value);
     console.log(this.newFlightForm.valid);
     console.log("The new flight was created successfully.");
-    this.router.navigateByUrl('flight/index');
+    this.router.navigateByUrl('flight/f-index');
   });
 }
 }

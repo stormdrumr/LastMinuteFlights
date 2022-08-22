@@ -34,14 +34,14 @@ export class FlightService {
   createFlight(flight: TravelDto): Observable<TravelDto>{
     return this.http.post<TravelDto>(this.flightUrl, flight, this.httpOptions);
   }
-
   updateFlight(flight: Travel): Observable<Travel>{
-    let url = '${this.flightUrl}/${flight.flightID}';
+    let url = this.flightUrl + '/' + flight.flightID;
     return this.http.put<Travel>(url, flight, this.httpOptions);
   }
 
-  deleteFlight(flightId: number): Observable<Travel>{
-    return this.http.delete<Travel>('${this.flightUrl}/${flightID}}', this.httpOptions);
+  deleteFlight(flightID: number): Observable<Travel>{
+    let url = this.flightUrl + '/' + flightID;
+    return this.http.delete<Travel>(url, this.httpOptions);
   }
 
 }

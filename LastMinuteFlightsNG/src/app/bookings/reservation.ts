@@ -5,5 +5,5 @@ export interface Reservation {
 
 export interface ReservationDto {
     FlightId: number;
-    PassengerID: number;
+    PassengerId: number;
 }
